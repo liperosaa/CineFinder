@@ -1,0 +1,535 @@
+/* ========================================
+   1. CONFIGURAÇÕES GERAIS
+======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --cor-fundo: #0f1117;
+    --cor-cartao: #1b1e27;
+    --cor-destaque: #e50914;
+    --cor-destaque-hover: #ff2631;
+    --cor-texto: #ffffff;
+    --cor-texto-secundario: #a7a9b4;
+    --cor-borda: #2b2e38;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    line-height: 1.6;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+.container {
+    width: min(1180px, 90%);
+    margin: 0 auto;
+}
+
+.texto-acessivel {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+
+/* ========================================
+   2. CABEÇALHO
+======================================== */
+
+.cabecalho {
+    background-color: #12141b;
+    border-bottom: 1px solid var(--cor-borda);
+}
+
+.navegacao {
+    min-height: 82px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.logo {
+    font-size: 27px;
+    font-weight: bold;
+    letter-spacing: -1px;
+}
+
+.logo span {
+    color: var(--cor-destaque);
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.menu a {
+    color: var(--cor-texto-secundario);
+    font-size: 14px;
+    transition: color 0.3s;
+}
+
+.menu a:hover,
+.menu .link-ativo {
+    color: var(--cor-texto);
+}
+
+
+/* ========================================
+   3. BANNER PRINCIPAL
+======================================== */
+
+.banner {
+    padding: 95px 0 85px;
+    background:
+        radial-gradient(
+            ellipse at 80% 20%,
+            rgba(229, 9, 20, 0.15),
+            transparent 45%
+        ),
+        linear-gradient(135deg, #151821, #0f1117);
+}
+
+.banner-conteudo {
+    max-width: 850px;
+    text-align: center;
+}
+
+.etiqueta,
+.subtitulo {
+    display: inline-block;
+    color: var(--cor-destaque);
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.banner h1 {
+    margin: 22px 0;
+    font-size: clamp(36px, 5vw, 58px);
+    line-height: 1.15;
+    letter-spacing: -2px;
+}
+
+.banner h1 span {
+    display: block;
+    color: var(--cor-destaque);
+}
+
+.banner-conteudo > p {
+    max-width: 620px;
+    margin: 0 auto;
+    color: var(--cor-texto-secundario);
+    font-size: 16px;
+}
+
+.formulario-pesquisa {
+    display: flex;
+    gap: 10px;
+    margin: 35px auto 15px;
+    padding: 8px;
+    max-width: 680px;
+    background-color: #ffffff;
+    border-radius: 10px;
+}
+
+.formulario-pesquisa input {
+    flex: 1;
+    min-width: 0;
+    padding: 12px 16px;
+    color: #222222;
+    background: transparent;
+    border: none;
+    outline: none;
+}
+
+.formulario-pesquisa input::placeholder {
+    color: #777777;
+}
+
+.formulario-pesquisa input:focus-visible {
+    outline: 2px solid var(--cor-destaque);
+    outline-offset: -2px;
+    border-radius: 5px;
+}
+
+.botao-pesquisar {
+    padding: 12px 24px;
+    color: var(--cor-texto);
+    background-color: var(--cor-destaque);
+    border: none;
+    border-radius: 7px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.botao-pesquisar:hover {
+    background-color: var(--cor-destaque-hover);
+}
+
+.banner-conteudo .texto-exemplo {
+    font-size: 12px;
+}
+
+
+/* ========================================
+   4. CATEGORIAS
+======================================== */
+
+.categorias {
+    padding: 28px 0;
+    border-bottom: 1px solid var(--cor-borda);
+}
+
+.categorias-lista {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.categoria {
+    padding: 9px 24px;
+    color: var(--cor-texto-secundario);
+    background-color: var(--cor-cartao);
+    border: 1px solid var(--cor-borda);
+    border-radius: 30px;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.categoria:hover,
+.categoria-ativa {
+    color: var(--cor-texto);
+    background-color: var(--cor-destaque);
+    border-color: var(--cor-destaque);
+}
+
+
+/* ========================================
+   5. SEÇÃO DE DESTAQUES
+======================================== */
+
+.destaques {
+    padding-top: 65px;
+    padding-bottom: 75px;
+}
+
+.secao-cabecalho {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 30px;
+}
+
+.secao-cabecalho h2,
+.sobre h2 {
+    margin-top: 5px;
+    font-size: 32px;
+}
+
+.secao-cabecalho > p {
+    color: var(--cor-texto-secundario);
+    font-size: 14px;
+}
+
+.filmes-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 28px 20px;
+}
+
+.filme-card {
+    min-width: 0;
+    overflow: hidden;
+    background-color: var(--cor-cartao);
+    border: 1px solid var(--cor-borda);
+    border-radius: 10px;
+    transition:
+        transform 0.3s,
+        border-color 0.3s;
+}
+
+.filme-card:hover {
+    transform: translateY(-5px);
+    border-color: #555a68;
+}
+
+.filme-imagem {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 2 / 3;
+    background-color: #252936;
+}
+
+.filme-imagem img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s;
+}
+
+.filme-card:hover .filme-imagem img {
+    transform: scale(1.04);
+}
+
+.tipo-conteudo {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    padding: 5px 9px;
+    color: var(--cor-texto);
+    background-color: var(--cor-destaque);
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.tipo-serie {
+    background-color: #424a65;
+}
+
+.filme-informacoes {
+    padding: 16px 14px;
+}
+
+.filme-informacoes h3 {
+    margin-bottom: 6px;
+    overflow-wrap: anywhere;
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+.filme-informacoes p {
+    color: var(--cor-texto-secundario);
+    font-size: 12px;
+}
+
+.filme-informacoes p span {
+    padding: 0 4px;
+    color: var(--cor-destaque);
+}
+
+
+/* ========================================
+   6. SOBRE O PROJETO
+======================================== */
+
+.sobre {
+    padding: 65px 0;
+    background-color: #151821;
+    border-top: 1px solid var(--cor-borda);
+    border-bottom: 1px solid var(--cor-borda);
+}
+
+.sobre-conteudo {
+    max-width: 760px;
+    text-align: center;
+}
+
+.sobre h2 {
+    margin-bottom: 18px;
+}
+
+.sobre p {
+    color: var(--cor-texto-secundario);
+    font-size: 15px;
+}
+
+
+/* ========================================
+   7. RODAPÉ
+======================================== */
+
+.rodape {
+    padding: 30px 0;
+}
+
+.rodape-conteudo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 18px;
+}
+
+.rodape .logo {
+    font-size: 22px;
+}
+
+.rodape p {
+    color: var(--cor-texto-secundario);
+    font-size: 12px;
+}
+
+.copyright {
+    text-align: right;
+}
+
+
+/* ========================================
+   8. RESPONSIVIDADE - TABLETS
+======================================== */
+
+@media (max-width: 900px) {
+
+    .banner {
+        padding: 75px 0;
+    }
+
+    .filmes-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 20px;
+    }
+
+    .secao-cabecalho {
+        align-items: start;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+}
+
+
+/* ========================================
+   9. RESPONSIVIDADE - CELULARES
+======================================== */
+
+@media (max-width: 600px) {
+
+    .navegacao {
+        min-height: 75px;
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
+        padding: 15px 0;
+    }
+
+    .logo {
+        font-size: 25px;
+    }
+
+    .menu {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .banner {
+        padding: 60px 0;
+    }
+
+    .banner h1 {
+        font-size: 36px;
+        letter-spacing: -1px;
+    }
+
+    .banner-conteudo > p {
+        font-size: 14px;
+    }
+
+    .formulario-pesquisa {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .formulario-pesquisa input {
+        width: 100%;
+        min-height: 45px;
+    }
+
+    .botao-pesquisar {
+        width: 100%;
+    }
+
+    .categorias {
+        padding: 20px 0;
+    }
+
+    .categoria {
+        padding: 8px 17px;
+    }
+
+    .destaques {
+        padding-top: 45px;
+        padding-bottom: 50px;
+    }
+
+    .secao-cabecalho h2,
+    .sobre h2 {
+        font-size: 27px;
+    }
+
+    .filmes-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px 12px;
+    }
+
+    .filme-informacoes {
+        padding: 12px 10px;
+    }
+
+    .filme-informacoes h3 {
+        font-size: 14px;
+    }
+
+    .filme-informacoes p {
+        font-size: 11px;
+    }
+
+    .tipo-conteudo {
+        top: 8px;
+        left: 8px;
+        padding: 4px 6px;
+        font-size: 9px;
+    }
+
+    .sobre {
+        padding: 50px 0;
+    }
+
+    .rodape-conteudo {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+    }
+
+    .copyright {
+        text-align: center;
+    }
+
+}

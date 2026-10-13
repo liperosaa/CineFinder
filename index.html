@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Encontre informações sobre seus filmes e séries favoritos no CineFinder.">
+
+    <title>CineFinder | Buscador de Filmes e Séries</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- Cabeçalho -->
+    <header class="cabecalho">
+        <div class="container navegacao">
+
+            <a href="index.html" class="logo">
+                Cine<span>Finder</span>
+            </a>
+
+            <nav class="menu">
+                <a href="index.html" class="link-ativo">Início</a>
+                <a href="#destaques">Destaques</a>
+                <a href="#sobre">Sobre</a>
+            </nav>
+
+        </div>
+    </header>
+
+    <main>
+
+        <!-- Banner principal -->
+        <section class="banner">
+            <div class="container banner-conteudo">
+
+                <span class="etiqueta">SEU UNIVERSO DO ENTRETENIMENTO</span>
+
+                <h1>
+                    Encontre sua próxima
+                    <span>história favorita.</span>
+                </h1>
+
+                <p>
+                    Explore filmes e séries, descubra novos títulos
+                    e encontre algo perfeito para assistir.
+                </p>
+
+                <!-- Campo de pesquisa visual, sem funcionalidade nesta etapa -->
+                <form class="formulario-pesquisa" role="search">
+
+                    <label for="pesquisa" class="texto-acessivel">
+                        Pesquisar filmes e séries
+                    </label>
+
+                    <input
+                        type="search"
+                        id="pesquisa"
+                        name="pesquisa"
+                        placeholder="Digite o nome de um filme ou série..."
+                    >
+
+                    <button type="button" class="botao-pesquisar">
+                        Pesquisar
+                    </button>
+
+                </form>
+
+                <p class="texto-exemplo">
+                    Exemplos: Interestelar, Batman, Stranger Things...
+                </p>
+
+            </div>
+        </section>
+
+        <!-- Categorias -->
+        <section class="categorias">
+            <div class="container">
+
+                <div class="categorias-lista">
+                    <a href="#destaques" class="categoria categoria-ativa">
+                        Todos
+                    </a>
+
+                    <a href="#destaques" class="categoria">
+                        Filmes
+                    </a>
+
+                    <a href="#destaques" class="categoria">
+                        Séries
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Conteúdos em destaque -->
+        <section class="destaques container" id="destaques">
+
+            <div class="secao-cabecalho">
+                <div>
+                    <span class="subtitulo">EXPLORE O CATÁLOGO</span>
+                    <h2>Em destaque</h2>
+                </div>
+
+                <p>Algumas histórias para começar sua busca.</p>
+            </div>
+
+            <div class="filmes-grid">
+
+                <!-- Filme 1 -->
+                <article class="filme-card">
+
+                    <div class="filme-imagem">
+                        <img
+                            src="https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg"
+                            alt="Cartaz do filme Interestelar"
+                            loading="lazy"
+                        >
+
+                        <span class="tipo-conteudo">FILME</span>
+                    </div>
+
+                    <div class="filme-informacoes">
+                        <h3>Interestelar</h3>
+                        <p>2014 <span>•</span> Ficção científica</p>
+                    </div>
+
+                </article>
+
+                <!-- Filme 2 -->
+                <article class="filme-card">
+
+                    <div class="filme-imagem">
+                        <img
+                            src="https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg"
+                            alt="Cartaz do filme Oppenheimer"
+                            loading="lazy"
+                        >
+
+                        <span class="tipo-conteudo">FILME</span>
+                    </div>
+
+                    <div class="filme-informacoes">
+                        <h3>Oppenheimer</h3>
+                        <p>2023 <span>•</span> Drama</p>
+                    </div>
+
+                </article>
+
+                <!-- Filme 3 -->
+                <article class="filme-card">
+
+                    <div class="filme-imagem">
+                        <img
+                            src="https://image.tmdb.org/t/p/w500/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg"
+                            alt="Cartaz do filme Coringa"
+                            loading="lazy"
+                        >
+
+                        <span class="tipo-conteudo">FILME</span>
+                    </div>
+
+                    <div class="filme-informacoes">
+                        <h3>Coringa</h3>
+                        <p>2019 <span>•</span> Suspense</p>
+                    </div>
+
+                </article>
+
+                <!-- Série 1 -->
+                <article class="filme-card">
+
+                    <div class="filme-imagem">
+                        <img
+                            src="https://image.tmdb.org/t/p/w500/x2LSRK2Cm7MZhjluni1msVJ3wDF.jpg"
+                            alt="Cartaz da série Stranger Things"
+                            loading="lazy"
+                        >
+
+                        <span class="tipo-conteudo tipo-serie">SÉRIE</span>
+                    </div>
+
+                    <div class="filme-informacoes">
+                        <h3>Stranger Things</h3>
+                        <p>2016 <span>•</span> Ficção científica</p>
+                    </div>
+
+                </article>
+
+                <!-- Série 2 -->
+                <article class="filme-card">
+
+                    <div class="filme-imagem">
+                        <img
+                            src="https://image.tmdb.org/t/p/w500/reEMJA1uzscCbkpeRJeTT2bjqUp.jpg"
+                            alt="Cartaz da série La Casa de Papel"
+                            loading="lazy"
+                        >
+
+                        <span class="tipo-conteudo tipo-serie">SÉRIE</span>
+                    </div>
+
+                    <div class="filme-informacoes">
+                        <h3>La Casa de Papel</h3>
+                        <p>2017 <span>•</span> Suspense</p>
+                    </div>
+
+                </article>
+
+                <!-- Série 3 -->
+                <article class="filme-card">
+
+                    <div class="filme-imagem">
+                        <img
+                            src="https://image.tmdb.org/t/p/w500/7WUHnWGx5OO145IRxPDUkQSh4C7.jpg"
+                            alt="Cartaz da série The Mandalorian"
+                            loading="lazy"
+                        >
+
+                        <span class="tipo-conteudo tipo-serie">SÉRIE</span>
+                    </div>
+
+                    <div class="filme-informacoes">
+                        <h3>The Mandalorian</h3>
+                        <p>2019 <span>•</span> Aventura</p>
+                    </div>
+
+                </article>
+
+                <!-- Filme 4 -->
+                <article class="filme-card">
+
+                    <div class="filme-imagem">
+                        <img
+                            src="https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg"
+                            alt="Cartaz do filme Batman: O Cavaleiro das Trevas"
+                            loading="lazy"
+                        >
+
+                        <span class="tipo-conteudo">FILME</span>
+                    </div>
+
+                    <div class="filme-informacoes">
+                        <h3>Batman: O Cavaleiro das Trevas</h3>
+                        <p>2008 <span>•</span> Ação</p>
+                    </div>
+
+                </article>
+
+                <!-- Série 4 -->
+                <article class="filme-card">
+
+                    <div class="filme-imagem">
+                        <img
+                            src="https://image.tmdb.org/t/p/w500/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg"
+                            alt="Cartaz da série Game of Thrones"
+                            loading="lazy"
+                        >
+
+                        <span class="tipo-conteudo tipo-serie">SÉRIE</span>
+                    </div>
+
+                    <div class="filme-informacoes">
+                        <h3>Game of Thrones</h3>
+                        <p>2011 <span>•</span> Fantasia</p>
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+        <!-- Sobre o projeto -->
+        <section class="sobre" id="sobre">
+            <div class="container sobre-conteudo">
+
+                <span class="subtitulo">SOBRE O PROJETO</span>
+
+                <h2>Seu próximo favorito está aqui.</h2>
+
+                <p>
+                    O CineFinder é um projeto acadêmico desenvolvido
+                    para facilitar a descoberta de filmes e séries.
+                    Em suas próximas etapas, utilizará uma API para
+                    consultar informações sobre diferentes títulos.
+                </p>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="rodape">
+        <div class="container rodape-conteudo">
+
+            <a href="index.html" class="logo">
+                Cine<span>Finder</span>
+            </a>
+
+            <p>
+                Projeto acadêmico de Programação Web II.
+            </p>
+
+            <p class="copyright">
+                &copy; 2026 CineFinder. Projeto educacional.
+            </p>
+
+        </div>
+    </footer>
+
+</body>
+</html>
