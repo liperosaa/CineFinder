@@ -7,7 +7,7 @@
 **Disciplina:** Programação Web II
 
 **Tecnologias:** HTML5, CSS3, JavaScript e API.
-
+x'x
 ## 2. Objetivo
 
 Desenvolver uma aplicação web simples para pesquisar filmes e séries, consultar informações sobre os títulos e visualizar seus cartazes.
