@@ -577,3 +577,146 @@ button {
         padding-bottom: 25px;
     }
 }
+
+
+/* ========================================
+   11. BOTÃO ADICIONAR À MINHA LISTA
+======================================== */
+
+.botao-salvar {
+    display: block;
+    width: 100%;
+    margin-top: 9px;
+    padding: 9px 10px;
+
+    color: var(--cor-texto);
+    background-color: transparent;
+
+    border: 1px solid var(--cor-destaque);
+    border-radius: 6px;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    transition:
+        background-color 0.3s,
+        color 0.3s;
+}
+
+.botao-salvar:hover {
+    color: var(--cor-texto);
+    background-color: var(--cor-destaque);
+}
+
+.botao-salvar:focus-visible {
+    outline: 2px solid var(--cor-texto);
+    outline-offset: 3px;
+}
+
+.botao-detalhes {
+    display: block;
+    width: 100%;
+}
+
+
+/* ========================================
+   12. PÁGINA MINHA LISTA
+======================================== */
+
+.conteudo-lista {
+    min-height: 70vh;
+    padding: 50px 8%;
+}
+
+.secao-lista h1 {
+    margin-bottom: 12px;
+    color: var(--cor-texto);
+    font-size: 32px;
+}
+
+.descricao-lista {
+    margin-bottom: 25px;
+    color: var(--cor-texto-secundario);
+}
+
+.status-filme {
+    margin: 12px 0;
+    color: var(--cor-texto-secundario);
+    font-size: 13px;
+}
+
+.mensagem {
+    margin-bottom: 20px;
+}
+
+@media (max-width: 600px) {
+    .conteudo-lista {
+        padding: 35px 5%;
+    }
+
+    .secao-lista h1 {
+        font-size: 26px;
+    }
+}
+
+/* ========================================
+   13. EDIÇÃO DA MINHA LISTA
+======================================== */
+
+.label-lista {
+    display: block;
+    margin-top: 12px;
+    margin-bottom: 6px;
+    color: var(--cor-texto);
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.campo-lista {
+    display: block;
+    width: 100%;
+    margin-top: 6px;
+    padding: 10px;
+    color: var(--cor-texto);
+    background-color: var(--cor-fundo);
+    border: 1px solid var(--cor-borda);
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 13px;
+}
+
+.campo-lista:focus {
+    outline: 2px solid var(--cor-destaque);
+    outline-offset: 2px;
+}
+
+.campo-lista option {
+    color: var(--cor-texto);
+    background-color: var(--cor-cartao);
+}
+
+.botao-excluir {
+    display: block;
+    width: 100%;
+    margin-top: 9px;
+    padding: 10px;
+    color: var(--cor-texto);
+    background-color: #8b151b;
+    border: 1px solid #8b151b;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.botao-excluir:hover {
+    background-color: #c91d27;
+}
+
+.botao-excluir:focus-visible,
+.botao-detalhes:focus-visible {
+    outline: 2px solid var(--cor-texto);
+    outline-offset: 3px;
+}
+

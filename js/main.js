@@ -2,38 +2,138 @@
 const API_KEY = "6a2da98e";
 const URL_BASE = "https://www.omdbapi.com/";
 
+// ========================================
+// ELEMENTOS DA PÁGINA
+// ========================================
+
 const formulario = document.querySelector("#form-busca");
 const campoBusca = document.querySelector("#campo-busca");
 const resultados = document.querySelector("#resultados");
 const mensagem = document.querySelector("#mensagem");
 
-// Evento 1: input
+// Armazena os resultados da pesquisa atual.
+let filmesEncontrados = [];
+
+// Chave utilizada no armazenamento do navegador.
+const CHAVE_LISTA = "cineFinderMinhaLista";
+
+// ========================================
+// 1. LOCALSTORAGE
+// ========================================
+
+// Recupera os títulos salvos no navegador.
+function obterMinhaLista() {
+    try {
+        const dados = localStorage.getItem(CHAVE_LISTA);
+
+        if (!dados) {
+            return [];
+        }
+
+        const lista = JSON.parse(dados);
+
+        return Array.isArray(lista) ? lista : [];
+
+    } catch (erro) {
+        console.error("Erro ao recuperar a lista:", erro);
+        return [];
+    }
+}
+
+// Salva a lista no navegador.
+function salvarMinhaLista(lista) {
+    try {
+        localStorage.setItem(CHAVE_LISTA, JSON.stringify(lista));
+        return true;
+
+    } catch (erro) {
+        console.error("Erro ao salvar a lista:", erro);
+
+        mensagem.textContent =
+            "Não foi possível salvar o título no navegador.";
+
+        return false;
+    }
+}
+
+// ========================================
+// 2. ADICIONAR TÍTULOS À MINHA LISTA
+// ========================================
+
+function adicionarMinhaLista(filme) {
+    const lista = obterMinhaLista();
+
+    // Verifica se o título já está salvo.
+    const jaExiste = lista.some((item) => {
+        return item.imdbID === filme.imdbID;
+    });
+
+    if (jaExiste) {
+        mensagem.textContent =
+            "Esse título já está na sua Minha Lista.";
+
+        return;
+    }
+
+    // Cria o objeto com os dados do título.
+    const novoTitulo = {
+        imdbID: filme.imdbID,
+        Title: filme.Title,
+        Year: filme.Year,
+        Type: filme.Type,
+        Poster: filme.Poster,
+        status: "Quero assistir",
+        observacao: ""
+    };
+
+    // Adiciona o título à lista.
+    lista.push(novoTitulo);
+
+    // Salva a lista atualizada.
+    const salvou = salvarMinhaLista(lista);
+
+    if (salvou) {
+        mensagem.textContent =
+            `${filme.Title} foi adicionado à sua Minha Lista!`;
+    }
+}
+
+// ========================================
+// 3. EVENTO INPUT
+// ========================================
+
 // Mostra uma orientação enquanto o usuário digita.
 campoBusca.addEventListener("input", () => {
     const termo = campoBusca.value.trim();
 
     if (termo) {
-        mensagem.textContent = "Pressione Pesquisar para buscar os títulos.";
+        mensagem.textContent =
+            "Pressione Pesquisar para buscar os títulos.";
     } else {
         mensagem.textContent = "";
     }
 });
 
-// Evento 2: submit
-// Consulta a API quando o formulário é enviado.
+// ========================================
+// 4. EVENTO SUBMIT E CONSULTA À API
+// ========================================
+
 formulario.addEventListener("submit", async (evento) => {
     evento.preventDefault();
 
     const termo = campoBusca.value.trim();
 
     if (!termo) {
-        mensagem.textContent = "Digite o nome de um filme ou série.";
+        mensagem.textContent =
+            "Digite o nome de um filme ou série.";
+
         campoBusca.focus();
         return;
     }
 
     mensagem.textContent = "Buscando...";
     resultados.innerHTML = "";
+    filmesEncontrados = [];
 
     try {
         const resposta = await fetch(
@@ -49,13 +149,17 @@ formulario.addEventListener("submit", async (evento) => {
         if (dados.Response === "False") {
             mensagem.textContent =
                 dados.Error || "Nenhum resultado encontrado.";
+
             return;
         }
 
-        mensagem.textContent =
-            `${dados.Search.length} resultado(s) encontrado(s).`;
+        // Guarda os resultados da pesquisa.
+        filmesEncontrados = dados.Search || [];
 
-        renderizar(dados.Search);
+        mensagem.textContent =
+            `${filmesEncontrados.length} resultado(s) encontrado(s).`;
+
+        renderizar(filmesEncontrados);
 
     } catch (erro) {
         mensagem.textContent =
@@ -65,27 +169,38 @@ formulario.addEventListener("submit", async (evento) => {
     }
 });
 
-// Cria os cards dinamicamente com os objetos retornados pela API.
+// ========================================
+// 5. RENDERIZAÇÃO DINÂMICA DOS CARTÕES
+// ========================================
+
 function renderizar(lista) {
     resultados.innerHTML = "";
 
     lista.forEach((filme) => {
+        // Cria o cartão.
         const card = document.createElement("article");
         card.classList.add("filme-card");
 
+        // Container da imagem.
         const imagemContainer = document.createElement("div");
         imagemContainer.classList.add("filme-imagem");
 
+        // Pôster.
         const poster = document.createElement("img");
+
         poster.src = filme.Poster !== "N/A"
             ? filme.Poster
             : "https://placehold.co/300x450?text=Sem+poster";
+
         poster.alt = `Pôster de ${filme.Title}`;
         poster.loading = "lazy";
 
+        // Etiqueta do tipo de conteúdo.
         const etiqueta = document.createElement("span");
         etiqueta.classList.add("tipo-conteudo");
-        etiqueta.textContent = filme.Type === "series" ? "SÉRIE" : "FILME";
+
+        etiqueta.textContent =
+            filme.Type === "series" ? "SÉRIE" : "FILME";
 
         if (filme.Type === "series") {
             etiqueta.classList.add("tipo-serie");
@@ -93,6 +208,7 @@ function renderizar(lista) {
 
         imagemContainer.append(poster, etiqueta);
 
+        // Informações do título.
         const informacoes = document.createElement("div");
         informacoes.classList.add("filme-informacoes");
 
@@ -102,28 +218,48 @@ function renderizar(lista) {
         const ano = document.createElement("p");
         ano.textContent = `${filme.Year} • ${filme.Type}`;
 
-        const botao = document.createElement("button");
-        botao.type = "button";
-        botao.classList.add("botao-detalhes");
-        botao.textContent = "Ver detalhes";
-        botao.dataset.id = filme.imdbID;
+        // ========================================
+        // BOTÃO VER DETALHES
+        // ========================================
 
-        informacoes.append(titulo, ano, botao);
-        card.append(imagemContainer, informacoes);
+        const botaoDetalhes = document.createElement("button");
+
+        botaoDetalhes.type = "button";
+        botaoDetalhes.classList.add("botao-detalhes");
+        botaoDetalhes.textContent = "Ver detalhes";
+
+        botaoDetalhes.addEventListener("click", () => {
+            window.location.href =
+                `pages/detalhes.html?id=${encodeURIComponent(filme.imdbID)}`;
+        });
+
+        // ========================================
+        // BOTÃO ADICIONAR À MINHA LISTA
+        // ========================================
+
+        const botaoSalvar = document.createElement("button");
+
+        botaoSalvar.type = "button";
+        botaoSalvar.classList.add("botao-salvar");
+        botaoSalvar.textContent = "Adicionar à Minha Lista";
+
+        botaoSalvar.addEventListener("click", () => {
+            adicionarMinhaLista(filme);
+        });
+
+        // Adiciona os elementos ao cartão.
+        informacoes.append(
+            titulo,
+            ano,
+            botaoDetalhes,
+            botaoSalvar
+        );
+
+        card.append(
+            imagemContainer,
+            informacoes
+        );
 
         resultados.appendChild(card);
     });
 }
-
-// Evento 3: click
-// Usa delegação de eventos para os botões criados dinamicamente.
-resultados.addEventListener("click", (evento) => {
-    const botao = evento.target.closest("button[data-id]");
-
-    if (botao) {
-        const id = botao.dataset.id;
-
-        window.location.href =
-            `pages/detalhes.html?id=${encodeURIComponent(id)}`;
-    }
-});
