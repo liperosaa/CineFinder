@@ -1,0 +1,204 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Confira informações completas sobre filmes e séries no CineFinder."
+    >
+
+    <title>Detalhes | CineFinder</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/detalhes.css">
+
+    <script src="../js/detalhes.js" defer></script>
+</head>
+
+<body>
+
+    <!-- Cabeçalho -->
+    <header class="cabecalho">
+        <div class="container navegacao">
+
+            <a href="../index.html" class="logo">
+                Cine<span>Finder</span>
+            </a>
+
+            <nav class="menu">
+                <a href="../index.html">Início</a>
+                <a href="minha-lista.html">Minha Lista</a>
+            </nav>
+
+        </div>
+    </header>
+
+    <main class="pagina-detalhes">
+
+        <section class="detalhes-container">
+
+            <!-- Navegação -->
+            <a href="../index.html" class="link-voltar">
+                &larr; Voltar para o início
+            </a>
+
+            <!-- Mensagem de carregamento e erros -->
+            <p
+                id="mensagem-detalhes"
+                class="mensagem-detalhes"
+                role="status"
+                aria-live="polite"
+            >
+                Carregando informações do título...
+            </p>
+
+            <!-- Conteúdo preenchido pelo JavaScript -->
+            <div
+                id="conteudo-detalhes"
+                class="conteudo-detalhes"
+                hidden
+            >
+
+                <section class="detalhes-principal">
+
+                    <div class="detalhes-poster">
+                        <img
+                            id="poster-detalhes"
+                            src=""
+                            alt=""
+                        >
+                    </div>
+
+                    <div class="detalhes-informacoes">
+
+                        <span id="tipo-detalhes" class="etiqueta-detalhes">
+                            FILME
+                        </span>
+
+                        <h1 id="titulo-detalhes"></h1>
+
+                        <p
+                            id="subtitulo-detalhes"
+                            class="subtitulo-detalhes"
+                        ></p>
+
+                        <div
+                            id="avaliacoes-detalhes"
+                            class="avaliacoes-detalhes"
+                        ></div>
+
+                        <div class="detalhes-sinopse">
+
+                            <h2>Sinopse</h2>
+
+                            <p id="sinopse-detalhes"></p>
+
+                        </div>
+
+                        <button
+                            type="button"
+                            id="botao-adicionar"
+                            class="botao-adicionar"
+                        >
+                            + Adicionar à Minha Lista
+                        </button>
+
+                        <p
+                            id="mensagem-lista-detalhes"
+                            class="mensagem-lista-detalhes"
+                            aria-live="polite"
+                        ></p>
+
+                    </div>
+
+                </section>
+
+                <!-- Informações técnicas -->
+                <section class="secao-informacoes">
+
+                    <div class="titulo-secao-detalhes">
+                        <span class="subtitulo-detalhes">
+                            INFORMAÇÕES
+                        </span>
+
+                        <h2>Ficha técnica</h2>
+                    </div>
+
+                    <div class="ficha-tecnica">
+
+                        <article class="item-ficha">
+                            <span>Direção</span>
+                            <p id="diretor-detalhes"></p>
+                        </article>
+
+                        <article class="item-ficha">
+                            <span>Roteiro</span>
+                            <p id="roteiro-detalhes"></p>
+                        </article>
+
+                        <article class="item-ficha">
+                            <span>Elenco</span>
+                            <p id="elenco-detalhes"></p>
+                        </article>
+
+                        <article class="item-ficha">
+                            <span>Gênero</span>
+                            <p id="genero-detalhes"></p>
+                        </article>
+
+                        <article class="item-ficha">
+                            <span>Classificação</span>
+                            <p id="classificacao-detalhes"></p>
+                        </article>
+
+                        <article class="item-ficha">
+                            <span>Idioma</span>
+                            <p id="idioma-detalhes"></p>
+                        </article>
+
+                        <article class="item-ficha">
+                            <span>País</span>
+                            <p id="pais-detalhes"></p>
+                        </article>
+
+                        <article class="item-ficha">
+                            <span>Prêmios</span>
+                            <p id="premios-detalhes"></p>
+                        </article>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="rodape">
+        <div class="container rodape-conteudo">
+
+            <a href="../index.html" class="logo">
+                Cine<span>Finder</span>
+            </a>
+
+            <p>
+                Projeto acadêmico de Programação Web II.
+            </p>
+
+            <p class="copyright">
+                &copy; 2026 CineFinder. Projeto educacional.
+            </p>
+
+        </div>
+    </footer>
+
+</body>
+
+</html>

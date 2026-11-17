@@ -1,0 +1,377 @@
+
+/* ========================================
+   CINEFINDER - PÁGINA DE DETALHES
+======================================== */
+
+/* 1. ESTRUTURA */
+
+.pagina-detalhes {
+    min-height: 75vh;
+    padding: 35px 0 80px;
+}
+
+.detalhes-container {
+    width: min(1180px, 90%);
+    margin: 0 auto;
+}
+
+.link-voltar {
+    display: inline-block;
+    margin-bottom: 30px;
+    color: var(--cor-texto-secundario, #a5a5b0);
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.25s;
+}
+
+.link-voltar:hover {
+    color: var(--cor-destaque, #e50914);
+}
+
+/* 2. MENSAGENS */
+
+.mensagem-detalhes {
+    min-height: 35px;
+    margin: 25px 0;
+    color: var(--cor-texto-secundario, #a5a5b0);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.mensagem-lista-detalhes {
+    min-height: 20px;
+    margin-top: 12px;
+    color: var(--cor-texto-secundario, #a5a5b0);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* 3. CONTEÚDO PRINCIPAL */
+
+.conteudo-detalhes {
+    animation: aparecer-detalhes 0.5s ease;
+}
+
+@keyframes aparecer-detalhes {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.detalhes-principal {
+    display: grid;
+    grid-template-columns: minmax(240px, 340px) minmax(0, 1fr);
+    align-items: start;
+    gap: 45px;
+    padding: 30px;
+    background: var(--cor-cartao, #1b1e27);
+    border: 1px solid var(--cor-borda, #30333d);
+    border-radius: 16px;
+}
+
+/* 4. PÔSTER */
+
+.detalhes-poster {
+    width: 100%;
+    overflow: hidden;
+    background: #252936;
+    border-radius: 12px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+}
+
+.detalhes-poster img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+}
+
+/* 5. INFORMAÇÕES PRINCIPAIS */
+
+.detalhes-informacoes {
+    min-width: 0;
+    padding: 8px 0;
+}
+
+.etiqueta-detalhes {
+    display: inline-block;
+    margin-bottom: 15px;
+    padding: 6px 11px;
+    color: #fff;
+    background: var(--cor-destaque, #e50914);
+    border-radius: 5px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+#titulo-detalhes {
+    margin: 0 0 12px;
+    color: var(--cor-texto, #fff);
+    font-size: clamp(28px, 4vw, 42px);
+    line-height: 1.15;
+    letter-spacing: -1px;
+    overflow-wrap: anywhere;
+}
+
+.subtitulo-detalhes {
+    margin-bottom: 20px;
+    color: var(--cor-texto-secundario, #a5a5b0);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* 6. AVALIAÇÕES */
+
+.avaliacoes-detalhes {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0 28px;
+}
+
+.avaliacao-imdb {
+    display: inline-flex;
+    align-items: center;
+    padding: 9px 13px;
+    color: #fff;
+    background: #34313a;
+    border: 1px solid #55505b;
+    border-radius: 7px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.avaliacao-imdb:first-letter {
+    color: #f5c518;
+}
+
+.avaliacao-votos,
+.outra-avaliacao {
+    padding: 9px 12px;
+    color: var(--cor-texto-secundario, #a5a5b0);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--cor-borda, #30333d);
+    border-radius: 7px;
+    font-size: 11px;
+}
+
+/* 7. SINOPSE */
+
+.detalhes-sinopse {
+    margin-bottom: 28px;
+}
+
+.detalhes-sinopse h2 {
+    margin-bottom: 12px;
+    color: var(--cor-texto, #fff);
+    font-size: 20px;
+}
+
+.detalhes-sinopse p {
+    color: var(--cor-texto-secundario, #a5a5b0);
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+/* 8. BOTÃO MINHA LISTA */
+
+.botao-adicionar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 47px;
+    padding: 13px 22px;
+    color: #fff;
+    background: var(--cor-destaque, #e50914);
+    border: 1px solid var(--cor-destaque, #e50914);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+        background-color 0.25s,
+        transform 0.25s,
+        border-color 0.25s;
+}
+
+.botao-adicionar:hover:not(:disabled) {
+    background: var(--cor-destaque-hover, #b80710);
+    border-color: var(--cor-destaque-hover, #b80710);
+    transform: translateY(-2px);
+}
+
+.botao-adicionar:disabled {
+    color: #d5d5d5;
+    background: #343943;
+    border-color: #454b58;
+    cursor: not-allowed;
+}
+
+.botao-ja-adicionado {
+    opacity: 0.9;
+}
+
+/* 9. FICHA TÉCNICA */
+
+.secao-informacoes {
+    margin-top: 45px;
+}
+
+.titulo-secao-detalhes {
+    margin-bottom: 22px;
+}
+
+.subtitulo-detalhes {
+    display: block;
+    color: var(--cor-destaque, #e50914);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.titulo-secao-detalhes h2 {
+    margin-top: 7px;
+    color: var(--cor-texto, #fff);
+    font-size: 26px;
+}
+
+.ficha-tecnica {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 15px;
+}
+
+.item-ficha {
+    min-width: 0;
+    min-height: 105px;
+    padding: 18px;
+    background: var(--cor-cartao, #1b1e27);
+    border: 1px solid var(--cor-borda, #30333d);
+    border-radius: 10px;
+}
+
+.item-ficha span {
+    display: block;
+    margin-bottom: 10px;
+    color: var(--cor-destaque, #e50914);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+.item-ficha p {
+    color: var(--cor-texto, #fff);
+    font-size: 13px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+/* 10. ACESSIBILIDADE */
+
+.detalhes-container button:focus-visible,
+.detalhes-container a:focus-visible {
+    outline: 2px solid var(--cor-destaque, #e50914);
+    outline-offset: 4px;
+}
+
+/* 11. TABLETS */
+
+@media (max-width: 900px) {
+    .detalhes-principal {
+        grid-template-columns: minmax(200px, 280px) minmax(0, 1fr);
+        gap: 28px;
+        padding: 24px;
+    }
+
+    .ficha-tecnica {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* 12. CELULARES */
+
+@media (max-width: 600px) {
+    .pagina-detalhes {
+        padding: 25px 0 55px;
+    }
+
+    .detalhes-container {
+        width: 92%;
+    }
+
+    .detalhes-principal {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        padding: 17px;
+    }
+
+    .detalhes-poster {
+        width: min(100%, 260px);
+        margin: 0 auto;
+    }
+
+    .detalhes-informacoes {
+        padding: 0;
+    }
+
+    #titulo-detalhes {
+        font-size: 29px;
+    }
+
+    .detalhes-sinopse p {
+        font-size: 13px;
+    }
+
+    .botao-adicionar {
+        width: 100%;
+    }
+
+    .secao-informacoes {
+        margin-top: 35px;
+    }
+
+    .titulo-secao-detalhes h2 {
+        font-size: 23px;
+    }
+
+    .ficha-tecnica {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .item-ficha {
+        min-height: auto;
+        padding: 15px;
+    }
+
+    .avaliacoes-detalhes {
+        gap: 7px;
+    }
+
+    .avaliacao-imdb,
+    .avaliacao-votos,
+    .outra-avaliacao {
+        font-size: 10px;
+    }
+}
+
+/* 13. REDUÇÃO DE MOVIMENTO */
+
+@media (prefers-reduced-motion: reduce) {
+    .conteudo-detalhes,
+    .detalhes-container * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
