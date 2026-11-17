@@ -156,6 +156,8 @@ A utilização da IA teve como objetivo auxiliar o aprendizado, esclarecer conce
 
 ### Registro 1 — 22/10/2026 — Felipe Padson — ChatGPT
 
+**Atividade:** Planejamento e organização inicial do projeto.
+
 **Prompt:**  
 "Analise a estrutura atual do projeto CineFinder e ajude-me a organizar os arquivos HTML, CSS e JavaScript. Explique a função de cada arquivo e sugira melhorias sem alterar a identidade visual existente."
 
@@ -173,7 +175,9 @@ Conferimos os caminhos dos arquivos e testamos se as páginas continuavam carreg
 
 ---
 
-### Registro 2 — 22/10/2026 — João Pedro Oliveira — ChatGPT
+### Registro 2 — 22/10/2026 — João Pedro Silva — ChatGPT
+
+**Atividade:** Integração com a OMDb API.
 
 **Prompt:**  
 "Ajude-me a integrar a OMDb API ao formulário de pesquisa do CineFinder usando JavaScript puro e `fetch`. Explique como enviar o termo pesquisado, tratar a resposta JSON e apresentar mensagens para campos vazios, resultados não encontrados e erros de conexão."
@@ -192,7 +196,9 @@ Testamos uma pesquisa válida, uma pesquisa sem resultados e o comportamento qua
 
 ---
 
-### Registro 3 — 22/10/2026 — Felipe Padson — ChatGPT
+### Registro 3 — 22/10/2026 — Danilo Oliveira — ChatGPT
+
+**Atividade:** Exibição dinâmica dos resultados.
 
 **Prompt:**  
 "Explique como gerar dinamicamente os cartões de filmes e séries a partir do vetor de objetos retornado pela OMDb API. Utilize manipulação do DOM, sem inserir os cartões manualmente no HTML, e preserve as classes CSS existentes."
@@ -211,7 +217,9 @@ Realizamos pesquisas diferentes e verificamos se os cartões eram gerados de aco
 
 ---
 
-### Registro 4 — 29/10/2026 — Felipe Padson — ChatGPT
+### Registro 4 — 29/10/2026 — Pedro Silva — ChatGPT
+
+**Atividade:** Implementação da página de detalhes.
 
 **Prompt:**  
 "Ajude-me a implementar o botão 'Ver detalhes' nos cartões do CineFinder. Explique como obter o IMDb ID do título selecionado e utilizá-lo para abrir a página de detalhes."
@@ -230,7 +238,9 @@ Clicamos nos botões de diferentes cartões e conferimos se o identificador corr
 
 ---
 
-### Registro 5 — 29/10/2026 — Felipe Padson — ChatGPT
+### Registro 5 — 29/10/2026 — Henrique Azevedo — ChatGPT
+
+**Atividade:** Revisão e responsividade.
 
 **Prompt:**  
 "Revise o código atual do CineFinder e ajude-me a identificar problemas de responsividade, mensagens de erro e organização do JavaScript. Explique as correções sugeridas sem reescrever todo o projeto."
@@ -251,6 +261,8 @@ Testamos o site em diferentes larguras de tela e revisamos o funcionamento da pe
 
 ### Registro 6 — 17/11/2026 — Felipe Padson — ChatGPT
 
+**Atividade:** Implementação do CRUD e persistência dos dados.
+
 **Prompt:**  
 "Ajude-me a concluir o CRUD da página Minha Lista do CineFinder. A funcionalidade de adicionar e visualizar títulos já está funcionando. Preciso implementar a edição do status e das observações pessoais, além da exclusão dos títulos com confirmação. Utilize JavaScript e localStorage, preserve os dados existentes e explique as alterações."
 
@@ -268,3 +280,17 @@ Testamos as quatro operações CRUD: criação, leitura, atualização e exclus�
 
 **Resultado:**  
 Todas as operações CRUD foram testadas e estão funcionando corretamente.
+
+---
+
+## 7. Participação dos integrantes
+
+| Integrante | Registros atribuídos | Atividades documentadas |
+|---|---:|---|
+| Felipe Padson | 1 e 6 | Planejamento inicial, organização e implementação do CRUD |
+| João Pedro Silva | 2 | Integração com a OMDb API |
+| Danilo Oliveira | 3 | Exibição dinâmica dos resultados |
+| Pedro Silva | 4 | Página de detalhes |
+| Henrique Azevedo | 5 | Revisão e responsividade |
+
+**Observação:** A atribuição dos registros identifica os responsáveis pelas atividades documentadas. Cada integrante deve revisar seu respectivo registro e confirmar que a atividade, o uso da IA e as verificações descritas correspondem à sua participação real no projeto.
