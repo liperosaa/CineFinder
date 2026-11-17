@@ -2,33 +2,20 @@
 const API_KEY = "6a2da98e";
 const URL_BASE = "https://www.omdbapi.com/";
 
-// ========================================
-// ELEMENTOS DA PÁGINA
-// ========================================
-
 const formulario = document.querySelector("#form-busca");
 const campoBusca = document.querySelector("#campo-busca");
 const resultados = document.querySelector("#resultados");
 const mensagem = document.querySelector("#mensagem");
 
-// Armazena os resultados da pesquisa atual.
-let filmesEncontrados = [];
-
-// Chave utilizada no armazenamento do navegador.
 const CHAVE_LISTA = "cineFinderMinhaLista";
 
-// ========================================
-// 1. LOCALSTORAGE
-// ========================================
+let filmesEncontrados = [];
 
-// Recupera os títulos salvos no navegador.
 function obterMinhaLista() {
     try {
         const dados = localStorage.getItem(CHAVE_LISTA);
 
-        if (!dados) {
-            return [];
-        }
+        if (!dados) return [];
 
         const lista = JSON.parse(dados);
 
@@ -40,7 +27,6 @@ function obterMinhaLista() {
     }
 }
 
-// Salva a lista no navegador.
 function salvarMinhaLista(lista) {
     try {
         localStorage.setItem(CHAVE_LISTA, JSON.stringify(lista));
@@ -56,26 +42,20 @@ function salvarMinhaLista(lista) {
     }
 }
 
-// ========================================
-// 2. ADICIONAR TÍTULOS À MINHA LISTA
-// ========================================
-
+// Adiciona um título à Minha Lista.
 function adicionarMinhaLista(filme) {
     const lista = obterMinhaLista();
 
-    // Verifica se o título já está salvo.
     const jaExiste = lista.some((item) => {
         return item.imdbID === filme.imdbID;
     });
 
     if (jaExiste) {
-        mensagem.textContent =
-            "Esse título já está na sua Minha Lista.";
-
+        window.location.href =
+            `pages/minha-lista.html?item=${encodeURIComponent(filme.imdbID)}`;
         return;
     }
 
-    // Cria o objeto com os dados do título.
     const novoTitulo = {
         imdbID: filme.imdbID,
         Title: filme.Title,
@@ -86,38 +66,24 @@ function adicionarMinhaLista(filme) {
         observacao: ""
     };
 
-    // Adiciona o título à lista.
     lista.push(novoTitulo);
 
-    // Salva a lista atualizada.
-    const salvou = salvarMinhaLista(lista);
-
-    if (salvou) {
-        mensagem.textContent =
-            `${filme.Title} foi adicionado à sua Minha Lista!`;
+    if (salvarMinhaLista(lista)) {
+        window.location.href =
+            `pages/minha-lista.html?item=${encodeURIComponent(filme.imdbID)}`;
     }
 }
 
-// ========================================
-// 3. EVENTO INPUT
-// ========================================
-
-// Mostra uma orientação enquanto o usuário digita.
+// Orientação durante a digitação.
 campoBusca.addEventListener("input", () => {
     const termo = campoBusca.value.trim();
 
-    if (termo) {
-        mensagem.textContent =
-            "Pressione Pesquisar para buscar os títulos.";
-    } else {
-        mensagem.textContent = "";
-    }
+    mensagem.textContent = termo
+        ? "Pressione Pesquisar para buscar os títulos."
+        : "";
 });
 
-// ========================================
-// 4. EVENTO SUBMIT E CONSULTA À API
-// ========================================
-
+// Pesquisa na API OMDb.
 formulario.addEventListener("submit", async (evento) => {
     evento.preventDefault();
 
@@ -136,8 +102,13 @@ formulario.addEventListener("submit", async (evento) => {
     filmesEncontrados = [];
 
     try {
+        const parametros = new URLSearchParams({
+            apikey: API_KEY,
+            s: termo
+        });
+
         const resposta = await fetch(
-            `${URL_BASE}?apikey=${API_KEY}&s=${encodeURIComponent(termo)}`
+            `${URL_BASE}?${parametros.toString()}`
         );
 
         if (!resposta.ok) {
@@ -149,11 +120,9 @@ formulario.addEventListener("submit", async (evento) => {
         if (dados.Response === "False") {
             mensagem.textContent =
                 dados.Error || "Nenhum resultado encontrado.";
-
             return;
         }
 
-        // Guarda os resultados da pesquisa.
         filmesEncontrados = dados.Search || [];
 
         mensagem.textContent =
@@ -162,40 +131,33 @@ formulario.addEventListener("submit", async (evento) => {
         renderizar(filmesEncontrados);
 
     } catch (erro) {
+        console.error("Erro na busca:", erro);
+
         mensagem.textContent =
             "Não foi possível carregar os resultados. Verifique sua conexão e tente novamente.";
-
-        console.error("Erro na busca:", erro);
     }
 });
 
-// ========================================
-// 5. RENDERIZAÇÃO DINÂMICA DOS CARTÕES
-// ========================================
-
+// Renderiza os resultados da pesquisa.
 function renderizar(lista) {
     resultados.innerHTML = "";
 
     lista.forEach((filme) => {
-        // Cria o cartão.
         const card = document.createElement("article");
         card.classList.add("filme-card");
 
-        // Container da imagem.
         const imagemContainer = document.createElement("div");
         imagemContainer.classList.add("filme-imagem");
 
-        // Pôster.
         const poster = document.createElement("img");
 
-        poster.src = filme.Poster !== "N/A"
+        poster.src = filme.Poster && filme.Poster !== "N/A"
             ? filme.Poster
             : "https://placehold.co/300x450?text=Sem+poster";
 
         poster.alt = `Pôster de ${filme.Title}`;
         poster.loading = "lazy";
 
-        // Etiqueta do tipo de conteúdo.
         const etiqueta = document.createElement("span");
         etiqueta.classList.add("tipo-conteudo");
 
@@ -208,7 +170,6 @@ function renderizar(lista) {
 
         imagemContainer.append(poster, etiqueta);
 
-        // Informações do título.
         const informacoes = document.createElement("div");
         informacoes.classList.add("filme-informacoes");
 
@@ -216,12 +177,11 @@ function renderizar(lista) {
         titulo.textContent = filme.Title;
 
         const ano = document.createElement("p");
-        ano.textContent = `${filme.Year} • ${filme.Type}`;
+        ano.textContent = `${filme.Year} • ${
+            filme.Type === "series" ? "Série" : "Filme"
+        }`;
 
-        // ========================================
-        // BOTÃO VER DETALHES
-        // ========================================
-
+        // Botão de detalhes.
         const botaoDetalhes = document.createElement("button");
 
         botaoDetalhes.type = "button";
@@ -233,10 +193,7 @@ function renderizar(lista) {
                 `pages/detalhes.html?id=${encodeURIComponent(filme.imdbID)}`;
         });
 
-        // ========================================
-        // BOTÃO ADICIONAR À MINHA LISTA
-        // ========================================
-
+        // Botão para adicionar à lista.
         const botaoSalvar = document.createElement("button");
 
         botaoSalvar.type = "button";
@@ -247,7 +204,6 @@ function renderizar(lista) {
             adicionarMinhaLista(filme);
         });
 
-        // Adiciona os elementos ao cartão.
         informacoes.append(
             titulo,
             ano,

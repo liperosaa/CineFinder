@@ -6,11 +6,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description" content="Sua lista pessoal de filmes e séries no CineFinder.">
+    <meta
+        name="description"
+        content="Gerencie seus filmes e séries favoritos no CineFinder."
+    >
 
     <title>Minha Lista | CineFinder</title>
 
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/minha-lista.css">
 
     <script src="../js/minha-lista.js" defer></script>
 </head>
@@ -18,41 +22,77 @@
 <body>
 
     <header class="cabecalho">
-        <nav class="navegacao">
-            <a href="../index.html" class="logo">CineFinder</a>
+        <div class="container navegacao">
 
-            <ul class="menu">
-                <li><a href="../index.html">Início</a></li>
-                <li><a href="minha-lista.html">Minha Lista</a></li>
-            </ul>
-        </nav>
+            <a href="../index.html" class="logo">
+                Cine<span>Finder</span>
+            </a>
+
+            <nav class="menu">
+                <a href="../index.html">Início</a>
+                <a href="../index.html#destaques">Destaques</a>
+                <a href="../index.html#sobre">Sobre</a>
+                <a href="minha-lista.html" class="link-ativo">Minha Lista</a>
+            </nav>
+
+        </div>
     </header>
 
     <main class="conteudo-lista">
 
         <section class="secao-lista">
 
-            <h1>Minha Lista</h1>
+            <div class="cabecalho-lista">
+                <div>
+                    <span class="subtitulo">SEU CATÁLOGO PESSOAL</span>
+                    <h1>Minha Lista</h1>
 
-            <p class="descricao-lista">
-                Aqui estão todos os filmes e séries que você salvou.
-            </p>
+                    <p class="descricao-lista">
+                        Organize seus filmes e séries favoritos
+                        em um só lugar.
+                    </p>
+                </div>
 
-            <p id="mensagem-lista" class="mensagem" aria-live="polite"></p>
+                <a href="../index.html" class="botao-voltar">
+                    + Explorar títulos
+                </a>
+            </div>
+
+            <div class="resumo-lista">
+                <span id="contador-lista">0 títulos salvos</span>
+                <span>Seus títulos, suas escolhas.</span>
+            </div>
+
+            <p
+                id="mensagem-lista"
+                class="mensagem mensagem-lista"
+                aria-live="polite"
+            ></p>
 
             <div
                 id="lista-filmes"
                 class="filmes-grid"
                 aria-live="polite"
-            >
-            </div>
+            ></div>
 
         </section>
 
     </main>
 
     <footer class="rodape">
-        <p>&copy; 2026 CineFinder. Todos os direitos reservados.</p>
+        <div class="container rodape-conteudo">
+
+            <a href="../index.html" class="logo">
+                Cine<span>Finder</span>
+            </a>
+
+            <p>Projeto acadêmico de Programação Web II.</p>
+
+            <p class="copyright">
+                &copy; 2026 CineFinder. Projeto educacional.
+            </p>
+
+        </div>
     </footer>
 
 </body>

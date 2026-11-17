@@ -1,0 +1,460 @@
+
+/* ========================================
+   CINEFINDER - MINHA LISTA
+======================================== */
+
+/* 1. ESTRUTURA PRINCIPAL */
+
+.conteudo-lista {
+    min-height: 75vh;
+    padding: 65px 0 85px;
+}
+
+.secao-lista {
+    width: min(1200px, 90%);
+    margin: 0 auto;
+}
+
+/* 2. CABEÇALHO DA LISTA */
+
+.cabecalho-lista {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    margin-bottom: 35px;
+}
+
+.cabecalho-lista h1 {
+    margin: 8px 0 10px;
+    font-size: clamp(30px, 4vw, 42px);
+    letter-spacing: -1.5px;
+}
+
+.descricao-lista {
+    max-width: 550px;
+    color: var(--cor-texto-secundario, #a5a5b0);
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.botao-voltar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 43px;
+    padding: 11px 18px;
+    color: #fff;
+    background: var(--cor-destaque, #e50914);
+    border: 1px solid var(--cor-destaque, #e50914);
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background-color 0.25s, transform 0.25s;
+}
+
+.botao-voltar:hover {
+    background: var(--cor-destaque-hover, #b80710);
+    transform: translateY(-2px);
+}
+
+/* 3. RESUMO DA LISTA */
+
+.resumo-lista {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 16px 20px;
+    margin-bottom: 22px;
+    background: var(--cor-cartao, #1b1e27);
+    border: 1px solid var(--cor-borda, #30333d);
+    border-radius: 10px;
+}
+
+.resumo-lista span:first-child {
+    color: var(--cor-texto, #fff);
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.resumo-lista span:last-child {
+    color: var(--cor-texto-secundario, #a5a5b0);
+    font-size: 12px;
+}
+
+/* 4. MENSAGENS */
+
+.mensagem-lista {
+    min-height: 24px;
+    margin-bottom: 22px;
+    color: var(--cor-texto-secundario, #a5a5b0);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* 5. GRADE DE CARTÕES */
+
+.conteudo-lista .filmes-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 25px 20px;
+}
+
+/* 6. CARTÕES */
+
+.conteudo-lista .filme-card {
+    min-width: 0;
+    overflow: hidden;
+    background: var(--cor-cartao, #1b1e27);
+    border: 1px solid var(--cor-borda, #30333d);
+    border-radius: 12px;
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.conteudo-lista .filme-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--cor-destaque, #e50914);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* 7. PÔSTER */
+
+.conteudo-lista .filme-imagem {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 2 / 3;
+    background: #252936;
+}
+
+.conteudo-lista .filme-imagem img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.conteudo-lista .filme-card:hover .filme-imagem img {
+    transform: scale(1.05);
+}
+
+/* 8. ETIQUETAS */
+
+.conteudo-lista .tipo-conteudo {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    padding: 6px 10px;
+    color: #fff;
+    background: var(--cor-destaque, #e50914);
+    border-radius: 5px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.conteudo-lista .tipo-serie {
+    background: #424a65;
+}
+
+/* 9. INFORMAÇÕES */
+
+.conteudo-lista .filme-informacoes {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 17px;
+}
+
+.conteudo-lista .filme-informacoes h3 {
+    margin: 0;
+    color: var(--cor-texto, #fff);
+    font-size: 17px;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
+
+.conteudo-lista .filme-informacoes > p {
+    margin: 0;
+    color: var(--cor-texto-secundario, #a5a5b0);
+    font-size: 12px;
+}
+
+/* 10. CAMPOS DO CRUD */
+
+.label-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: var(--cor-texto, #fff);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.campo-lista {
+    width: 100%;
+    min-width: 0;
+    padding: 11px 12px;
+    color: var(--cor-texto, #fff);
+    background: #12141b;
+    border: 1px solid var(--cor-borda, #30333d);
+    border-radius: 7px;
+    font-family: inherit;
+    font-size: 12px;
+    outline: none;
+    transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+.campo-lista:focus {
+    border-color: var(--cor-destaque, #e50914);
+    box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.12);
+}
+
+select.campo-lista {
+    cursor: pointer;
+}
+
+select.campo-lista option {
+    color: #fff;
+    background: #1b1e27;
+}
+
+textarea.campo-lista {
+    min-height: 95px;
+    resize: vertical;
+    line-height: 1.5;
+}
+
+.campo-lista::placeholder {
+    color: #777b89;
+}
+
+/* 11. BOTÕES */
+
+.conteudo-lista .botao-detalhes,
+.conteudo-lista .botao-excluir {
+    width: 100%;
+    min-height: 40px;
+    padding: 11px 12px;
+    border-radius: 7px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+        background-color 0.25s,
+        border-color 0.25s,
+        color 0.25s;
+}
+
+.conteudo-lista .botao-detalhes {
+    color: #fff;
+    background: var(--cor-destaque, #e50914);
+    border: 1px solid var(--cor-destaque, #e50914);
+}
+
+.conteudo-lista .botao-detalhes:hover {
+    background: var(--cor-destaque-hover, #b80710);
+    border-color: var(--cor-destaque-hover, #b80710);
+}
+
+.conteudo-lista .botao-excluir {
+    color: #ff6971;
+    background: transparent;
+    border: 1px solid #87323a;
+}
+
+.conteudo-lista .botao-excluir:hover {
+    color: #fff;
+    background: #a51d28;
+    border-color: #a51d28;
+}
+
+/* 12. DESTAQUE DO TÍTULO ADICIONADO */
+
+.conteudo-lista .filme-card-destacado {
+    border-color: var(--cor-destaque, #e50914);
+    box-shadow: 0 0 0 2px rgba(229, 9, 20, 0.35);
+    animation: destacar-cartao 1.2s ease-in-out 2;
+}
+
+@keyframes destacar-cartao {
+    0%, 100% {
+        box-shadow: 0 0 0 2px rgba(229, 9, 20, 0.25);
+    }
+
+    50% {
+        box-shadow: 0 0 0 5px rgba(229, 9, 20, 0.15);
+    }
+}
+
+/* 13. LISTA VAZIA */
+
+.lista-vazia {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    padding: 40px 20px;
+    text-align: center;
+    background: var(--cor-cartao, #1b1e27);
+    border: 1px dashed var(--cor-borda, #30333d);
+    border-radius: 12px;
+}
+
+.lista-vazia-icone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 58px;
+    height: 58px;
+    margin-bottom: 18px;
+    color: #fff;
+    background: var(--cor-destaque, #e50914);
+    border-radius: 50%;
+    font-size: 30px;
+}
+
+.lista-vazia h2 {
+    margin-bottom: 10px;
+    color: var(--cor-texto, #fff);
+    font-size: 22px;
+}
+
+.lista-vazia p {
+    max-width: 420px;
+    margin-bottom: 22px;
+    color: var(--cor-texto-secundario, #a5a5b0);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* 14. ACESSIBILIDADE */
+
+.conteudo-lista button:focus-visible,
+.conteudo-lista a:focus-visible,
+.conteudo-lista .campo-lista:focus-visible {
+    outline: 2px solid var(--cor-destaque, #e50914);
+    outline-offset: 3px;
+}
+
+/* 15. TABLETS */
+
+@media (max-width: 1000px) {
+    .conteudo-lista .filmes-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 20px;
+    }
+}
+
+@media (max-width: 750px) {
+    .conteudo-lista .filmes-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+    }
+
+    .cabecalho-lista {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+/* 16. CELULARES */
+
+@media (max-width: 480px) {
+    .conteudo-lista {
+        padding: 40px 0 55px;
+    }
+
+    .secao-lista {
+        width: 92%;
+    }
+
+    .cabecalho-lista h1 {
+        font-size: 30px;
+    }
+
+    .descricao-lista {
+        font-size: 13px;
+    }
+
+    .resumo-lista {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 7px;
+        padding: 14px;
+    }
+
+    .conteudo-lista .filmes-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .conteudo-lista .filme-card {
+        display: grid;
+        grid-template-columns: 115px minmax(0, 1fr);
+        align-items: stretch;
+    }
+
+    .conteudo-lista .filme-imagem {
+        height: 100%;
+        min-height: 210px;
+        aspect-ratio: auto;
+    }
+
+    .conteudo-lista .filme-imagem img {
+        position: absolute;
+        inset: 0;
+    }
+
+    .conteudo-lista .tipo-conteudo {
+        top: 7px;
+        left: 7px;
+        padding: 4px 6px;
+        font-size: 8px;
+    }
+
+    .conteudo-lista .filme-informacoes {
+        gap: 10px;
+        padding: 12px;
+    }
+
+    .conteudo-lista .filme-informacoes h3 {
+        font-size: 14px;
+    }
+
+    .conteudo-lista .filme-informacoes > p {
+        font-size: 11px;
+    }
+
+    .campo-lista {
+        padding: 9px;
+        font-size: 11px;
+    }
+
+    .conteudo-lista .botao-detalhes,
+    .conteudo-lista .botao-excluir {
+        padding: 9px 6px;
+        font-size: 10px;
+    }
+}
+
+/* Respeita usuários que preferem menos animações. */
+
+@media (prefers-reduced-motion: reduce) {
+    .conteudo-lista *,
+    .conteudo-lista *::before,
+    .conteudo-lista *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
