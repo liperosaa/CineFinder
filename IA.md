@@ -1,4 +1,3 @@
-
 # Registro de Utilização de Inteligência Artificial
 
 ## 1. Identificação do projeto
@@ -9,9 +8,9 @@
 
 ## 2. Objetivo
 
-Desenvolver uma aplicação web responsiva para pesquisar filmes e séries, visualizar resultados em cartões e consultar informações sobre os títulos selecionados.
+Desenvolver uma aplicação web responsiva para pesquisar filmes e séries, visualizar resultados em cartões, consultar informações sobre os títulos selecionados e organizar uma lista pessoal de conteúdos.
 
-O projeto é desenvolvido em etapas, priorizando a compreensão dos conceitos fundamentais de desenvolvimento web.
+O projeto é desenvolvido em etapas, priorizando a compreensão dos conceitos fundamentais de desenvolvimento web, manipulação do DOM, consumo de APIs e armazenamento de dados no navegador.
 
 ## 3. Prompts utilizados
 
@@ -87,6 +86,22 @@ O projeto é desenvolvido em etapas, priorizando a compreensão dos conceitos fu
 >
 > Não altere o projeto inteiro de uma vez. Liste os problemas encontrados, explique por que são problemas e sugira correções simples que eu consiga compreender e testar.
 
+### Prompt 8 — Implementação do CRUD completo
+
+> Ajude-me a concluir as operações CRUD da página Minha Lista do CineFinder utilizando JavaScript e `localStorage`.
+>
+> A aplicação já permite adicionar e visualizar filmes e séries salvos.
+>
+> Oriente a implementação das funcionalidades de atualização e exclusão dos títulos.
+>
+> Cada cartão deve permitir alterar o status entre Quero assistir, Assistindo e Concluído, adicionar observações pessoais, salvar as alterações e remover o título da lista mediante confirmação.
+>
+> Preserve os dados já armazenados, a estrutura existente dos cartões e as classes CSS do projeto.
+>
+> Explique o funcionamento das funções, utilize os identificadores IMDb para localizar os títulos e garanta que as alterações permaneçam salvas após atualizar a página.
+>
+> Ao final, apresente testes para verificar as quatro operações CRUD.
+
 ## 4. Requisitos e desenvolvimento
 
 ### Etapa 1 — HTML e CSS
@@ -106,18 +121,36 @@ O projeto é desenvolvido em etapas, priorizando a compreensão dos conceitos fu
 - Implementar eventos como `input`, `submit` e `click`.
 - Exibir mensagens para buscas vazias, resultados não encontrados e falhas na comunicação com a API.
 
-### Etapas seguintes
+### Etapa 3 — Página de detalhes
 
-- Implementar a página de detalhes dos títulos.
-- Desenvolver funcionalidades de organização e persistência dos dados.
-- Testar, corrigir e documentar a aplicação.
+- Consultar os dados específicos dos títulos utilizando o IMDb ID.
+- Apresentar informações detalhadas dos filmes e séries.
+- Tratar informações indisponíveis e erros da API.
+
+### Etapa 4 — Persistência e CRUD
+
+- Criar a funcionalidade de adicionar títulos à Minha Lista.
+- Recuperar e exibir os títulos armazenados.
+- Permitir editar o status dos títulos.
+- Permitir adicionar e editar observações pessoais.
+- Implementar a exclusão de títulos com confirmação.
+- Utilizar `localStorage` para manter os dados após atualizar a página.
+
+### Etapa 5 — Testes e revisão
+
+- Testar as funcionalidades de pesquisa e navegação.
+- Verificar a criação, leitura, atualização e exclusão dos títulos.
+- Confirmar a persistência dos dados após recarregar a página.
+- Revisar a responsividade e o comportamento das páginas.
+- Corrigir possíveis erros e atualizar a documentação.
 
 ## 5. Forma de utilização da IA
 
 A inteligência artificial foi utilizada como ferramenta de apoio para planejar a arquitetura, organizar os arquivos, orientar a implementação e auxiliar na identificação de problemas.
 
-As sugestões foram analisadas e adaptadas ao projeto. O código utilizado deve ser revisado, testado e compreendido pelo estudante antes da entrega.
+As sugestões foram analisadas e adaptadas ao projeto. Os códigos sugeridos foram integrados à estrutura existente, testados e ajustados conforme as necessidades da aplicação.
 
+A utilização da IA teve como objetivo auxiliar o aprendizado, esclarecer conceitos de programação e apoiar o desenvolvimento das funcionalidades, mantendo a compreensão do funcionamento do código como parte fundamental do processo.
 
 ## 6. Diário de utilização
 
@@ -214,3 +247,24 @@ Descartamos sugestões que exigiriam mudanças desnecessárias na estrutura já 
 **Verificação:**  
 Testamos o site em diferentes larguras de tela e revisamos o funcionamento da pesquisa e da navegação.
 
+---
+
+### Registro 6 — 17/11/2026 — Felipe Padson — ChatGPT
+
+**Prompt:**  
+"Ajude-me a concluir o CRUD da página Minha Lista do CineFinder. A funcionalidade de adicionar e visualizar títulos já está funcionando. Preciso implementar a edição do status e das observações pessoais, além da exclusão dos títulos com confirmação. Utilize JavaScript e localStorage, preserve os dados existentes e explique as alterações."
+
+**Resposta aproveitada:**  
+Orientações e exemplos de implementação das funções de atualização e exclusão, criação dos campos de edição e montagem dinâmica dos cartões.
+
+**Aceitei:**  
+A utilização do IMDb ID para identificar os títulos, a atualização dos objetos armazenados, o uso de `localStorage` para persistência e a confirmação antes da exclusão.
+
+**Modifiquei ou rejeitei:**  
+Adaptamos o código aos nomes dos arquivos, seletores HTML, classes CSS e estrutura já existentes no CineFinder.
+
+**Verificação:**  
+Testamos as quatro operações CRUD: criação, leitura, atualização e exclusão. Alteramos o status de um título, adicionamos observações, salvamos as alterações, atualizamos a página e verificamos a persistência. Também removemos um título mediante confirmação e verificamos se ele continuava excluído após atualizar a página.
+
+**Resultado:**  
+Todas as operações CRUD foram testadas e estão funcionando corretamente.
