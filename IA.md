@@ -302,8 +302,10 @@ Não houve rejeição de trechos nesta etapa. Foram preservados a estrutura de p
 **Verificação:**  
 O código foi executado em um navegador automatizado, com a resposta da OMDb API simulada. Foram conferidos: os 8 destaques desenhados pelo JavaScript e os filtros (4 séries e 4 filmes); a mensagem para busca vazia e para busca com 1 caractere; o retorno de resultados em cartões; adicionar à Minha Lista com a data de adição; busca por título na lista (inclusive com diferença de acento) e filtro por status; nota inválida (11) rejeitada com mensagem ao lado do campo e nota 8,55 salva como 8,6; edição do status e das observações, com os dados mantidos após recarregar a página; exclusão com confirmação; na página de detalhes, duração "169 min" exibida como "2h 49min", nota "8,7" e votos "2.100.345"; mensagem amigável quando a requisição à API falha; e ausência de rolagem horizontal em tela de 375 px nas três páginas.
 
+Depois de publicar as correções no GitHub Pages, também testamos o site manualmente, com a OMDb API real, e as funcionalidades funcionaram corretamente.
+
 **Resultado:**  
-As correções ficaram aplicadas no projeto e funcionaram nos testes descritos.
+As correções ficaram aplicadas no projeto e funcionaram tanto nos testes automatizados quanto no site publicado no GitHub Pages.
 
 ---
 

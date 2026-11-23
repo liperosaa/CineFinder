@@ -56,9 +56,12 @@ O projeto usa apenas HTML, CSS e JavaScript no navegador e não precisa de servi
 
 ## Configuração da API
 
-A aplicação utiliza uma chave de acesso da OMDb API.
+A aplicação utiliza uma chave gratuita da OMDb API, declarada na constante `API_KEY` em dois arquivos:
 
-No arquivo `js/main.js`, localize a constante `API_KEY` e substitua o valor de exemplo pela sua chave:
+- `js/main.js`: pesquisa de títulos;
+- `js/detalhes.js`: página de detalhes.
+
+Para usar outra chave, altere o valor nos dois arquivos:
 
 ```javascript
 const API_KEY = "SUA_CHAVE_AQUI";
@@ -68,7 +71,7 @@ Para obter uma chave, acesse:
 
 https://www.omdbapi.com/apikey.aspx
 
-**Atenção:** uma chave inserida no JavaScript do navegador fica visível aos visitantes. Não utilize uma chave privada ou sensível em um repositório público.
+**Atenção:** uma chave inserida no JavaScript do navegador fica visível aos visitantes. Por isso, o projeto usa uma chave gratuita, sem dados sensíveis. A chave gratuita tem limite diário de requisições; se o limite for atingido, a API devolve um erro e o site exibe uma mensagem amigável.
 
 ## Armazenamento dos dados
 
@@ -121,6 +124,7 @@ CineFinder/
 | R8 – String, Number, Math e Date | Formatação de duração, nota e votos (`detalhes.js`); nota pessoal e data de adição (`minha-lista.js`); normalização de textos |
 | R9 – Validação sem `alert` | Busca (`main.js`) e nota pessoal (`minha-lista.js`) |
 | R10 – README.md e IA.md | Este arquivo e o `IA.md` |
+| Bônus – GitHub Pages | Site publicado em https://liperosaa.github.io/CineFinder/ |
 
 ## Integrantes e responsabilidades
 
