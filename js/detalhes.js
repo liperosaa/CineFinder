@@ -14,7 +14,8 @@ const CHAVE_LISTA = "cineFinderMinhaLista";
 // ========================================
 
 const mensagemDetalhes = document.querySelector("#mensagem-detalhes");
-const conteudoDetalhes = document.querySelector("#conteudo-detalhes");
+const conteudoDetalhes = document.querySelector("#conteudo-detalhes");  
+
 
 const posterDetalhes = document.querySelector("#poster-detalhes");
 const tipoDetalhes = document.querySelector("#tipo-detalhes");
@@ -153,6 +154,44 @@ function obterValor(valor) {
     return valor;
 }
 
+// Converte a duração da API (ex.: "148 min") em horas e minutos (ex.: "2h 28min").
+function formatarDuracao(duracao) {
+    const minutosTotais = parseInt(duracao, 10);
+
+    if (Number.isNaN(minutosTotais)) {
+        return "Não informado";
+    }
+
+    const horas = Math.floor(minutosTotais / 60);
+    const minutos = minutosTotais % 60;
+
+    return horas > 0
+        ? `${horas}h ${String(minutos).padStart(2, "0")}min`
+        : `${minutos}min`;
+}
+
+// Converte a nota do IMDb (texto, ex.: "8.7") em número com uma casa decimal e vírgula.
+function formatarNota(nota) {
+    const valor = Number(nota);
+
+    if (!nota || Number.isNaN(valor)) {
+        return "";
+    }
+
+    return valor.toFixed(1).replace(".", ",");
+}
+
+// Converte os votos (texto, ex.: "2,100,000") em número formatado em pt-BR.
+function formatarVotos(votos) {
+    const valor = Number(String(votos).replace(/,/g, ""));
+
+    if (!votos || Number.isNaN(valor)) {
+        return "";
+    }
+
+    return valor.toLocaleString("pt-BR");
+}
+
 // Verifica se a URL do pôster é válida.
 function obterPoster(poster) {
     if (!poster || poster === "N/A") {
@@ -196,7 +235,7 @@ function renderizarDetalhes(filme) {
     subtituloDetalhes.textContent = [
         obterValor(filme.Year),
         obterValor(filme.Rated),
-        obterValor(filme.Runtime)
+        formatarDuracao(filme.Runtime)
     ].filter(valor => valor !== "Não informado").join(" • ");
 
     // Sinopse.
@@ -234,15 +273,17 @@ function renderizarAvaliacoes(filme) {
 
     avaliacoesDetalhes.innerHTML = "";
 
-    const avaliacaoIMDb =
-        filme.imdbRating && filme.imdbRating !== "N/A"
-            ? `IMDb: ${filme.imdbRating}/10`
-            : "IMDb: Sem avaliação";
+    const notaFormatada = formatarNota(filme.imdbRating);
 
-    const votos =
-        filme.imdbVotes && filme.imdbVotes !== "N/A"
-            ? `${filme.imdbVotes} votos`
-            : "";
+    const avaliacaoIMDb = notaFormatada
+        ? `IMDb: ${notaFormatada}/10`
+        : "IMDb: Sem avaliação";
+
+    const votosFormatados = formatarVotos(filme.imdbVotes);
+
+    const votos = votosFormatados
+        ? `${votosFormatados} votos`
+        : "";
 
     const elementoIMDb = document.createElement("span");
     elementoIMDb.classList.add("avaliacao-imdb");
@@ -340,7 +381,9 @@ function adicionarMinhaLista() {
         Type: filmeAtual.Type,
         Poster: filmeAtual.Poster,
         status: "Quero assistir",
-        observacao: ""
+        observacao: "",
+        nota: null,
+        adicionadoEm: new Date().toISOString()
     };
 
     lista.push(novoTitulo);

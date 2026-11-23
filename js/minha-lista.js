@@ -5,6 +5,55 @@ const contadorLista = document.querySelector("#contador-lista");
 
 const CHAVE_LISTA = "cineFinderMinhaLista";
 
+const formFiltros = document.querySelector("#filtros-lista");
+const campoBuscaLista = document.querySelector("#busca-lista");
+const campoFiltroStatus = document.querySelector("#filtro-status");
+
+// Filtros ativos (R7).
+let termoBusca = "";
+let statusFiltrado = "todos";
+
+// Padroniza o texto para comparar: minúsculas e sem acentos.
+function normalizarTexto(texto) {
+    return String(texto)
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .trim();
+}
+
+// Formata a data de adição (ex.: "22/11/2026 · hoje" ou "há 3 dias").
+function formatarDataAdicao(dataIso) {
+    const data = new Date(dataIso);
+
+    if (!dataIso || Number.isNaN(data.getTime())) {
+        return "";
+    }
+
+    const dias = Math.floor((Date.now() - data.getTime()) / 86400000);
+
+    let quando = `há ${dias} dias`;
+
+    if (dias <= 0) {
+        quando = "hoje";
+    } else if (dias === 1) {
+        quando = "ontem";
+    }
+
+    return `Adicionado em ${data.toLocaleDateString("pt-BR")} (${quando})`;
+}
+
+// Converte o texto da nota em número entre 0 e 10, ou devolve null se for inválido.
+function converterNota(texto) {
+    const valor = Number(texto.replace(",", "."));
+
+    if (Number.isNaN(valor) || valor < 0 || valor > 10) {
+        return null;
+    }
+
+    return Math.round(valor * 10) / 10;
+}
+
 function obterMinhaLista() {
     try {
         const dados = localStorage.getItem(CHAVE_LISTA);
@@ -47,7 +96,7 @@ function atualizarContador(quantidade) {
 }
 
 // Atualiza status e observações.
-function atualizarTitulo(imdbID, novoStatus, novaObservacao) {
+function atualizarTitulo(imdbID, novoStatus, novaObservacao, novaNota) {
     const lista = obterMinhaLista();
 
     const indice = lista.findIndex((filme) => {
@@ -62,6 +111,7 @@ function atualizarTitulo(imdbID, novoStatus, novaObservacao) {
 
     lista[indice].status = novoStatus;
     lista[indice].observacao = novaObservacao;
+    lista[indice].nota = novaNota;
 
     if (salvarMinhaLista(lista)) {
         mensagemLista.textContent =
@@ -174,6 +224,33 @@ function criarCartao(filme) {
 
     labelStatus.appendChild(campoStatus);
 
+    // Campo de nota pessoal (0 a 10), com validação ao lado do campo.
+    const labelNota = document.createElement("label");
+    labelNota.classList.add("label-lista");
+    labelNota.textContent = "Minha nota (0 a 10)";
+
+    const campoNota = document.createElement("input");
+    campoNota.type = "text";
+    campoNota.inputMode = "decimal";
+    campoNota.classList.add("campo-lista");
+    campoNota.placeholder = "Ex.: 8,5";
+    campoNota.maxLength = 4;
+
+    campoNota.value = typeof filme.nota === "number"
+        ? String(filme.nota).replace(".", ",")
+        : "";
+
+    const erroNota = document.createElement("p");
+    erroNota.classList.add("erro-campo");
+    erroNota.setAttribute("role", "alert");
+
+    campoNota.addEventListener("input", () => {
+        erroNota.textContent = "";
+        campoNota.removeAttribute("aria-invalid");
+    });
+
+    labelNota.append(campoNota, erroNota);
+
     // Campo de observações.
     const labelObservacao = document.createElement("label");
     labelObservacao.classList.add("label-lista");
@@ -204,10 +281,27 @@ function criarCartao(filme) {
     botaoSalvar.textContent = "Salvar alterações";
 
     botaoSalvar.addEventListener("click", () => {
+        const textoNota = campoNota.value.trim();
+        let nota = null;
+
+        if (textoNota !== "") {
+            nota = converterNota(textoNota);
+
+            if (nota === null) {
+                erroNota.textContent = "Informe uma nota entre 0 e 10.";
+                campoNota.setAttribute("aria-invalid", "true");
+                campoNota.focus();
+                return;
+            }
+
+            campoNota.value = String(nota).replace(".", ",");
+        }
+
         atualizarTitulo(
             filme.imdbID,
             campoStatus.value,
-            campoObservacao.value.trim()
+            campoObservacao.value.trim(),
+            nota
         );
     });
 
@@ -222,10 +316,16 @@ function criarCartao(filme) {
         excluirTitulo(filme.imdbID);
     });
 
+    const dataAdicao = document.createElement("p");
+    dataAdicao.classList.add("data-adicao");
+    dataAdicao.textContent = formatarDataAdicao(filme.adicionadoEm);
+
     informacoes.append(
         titulo,
         ano,
+        dataAdicao,
         labelStatus,
+        labelNota,
         labelObservacao,
         botaoSalvar,
         botaoExcluir
@@ -270,9 +370,26 @@ function destacarTituloAdicionado() {
     }
 }
 
-// Renderiza toda a lista.
+// Aplica a busca por título e o filtro de status sobre a lista salva.
+function filtrarLista(lista) {
+    const termo = normalizarTexto(termoBusca);
+
+    return lista.filter((filme) => {
+        const combinaTitulo = normalizarTexto(filme.Title).includes(termo);
+        const combinaStatus =
+            statusFiltrado === "todos" || filme.status === statusFiltrado;
+
+        return combinaTitulo && combinaStatus;
+    });
+}
+
+// Evita rolar a página de novo toda vez que um filtro mudar.
+let primeiraRenderizacao = true;
+
+// Renderiza a lista (já filtrada).
 function renderizarMinhaLista() {
     const lista = obterMinhaLista();
+    const filtrada = filtrarLista(lista);
 
     listaFilmes.innerHTML = "";
 
@@ -305,16 +422,54 @@ function renderizarMinhaLista() {
         return;
     }
 
-    mensagemLista.textContent =
-        `${lista.length} título(s) na sua lista.`;
+    if (filtrada.length === 0) {
+        const vazio = document.createElement("div");
+        vazio.classList.add("lista-vazia");
 
-    lista.forEach((filme) => {
+        const titulo = document.createElement("h2");
+        titulo.textContent = "Nenhum título encontrado";
+
+        const descricao = document.createElement("p");
+        descricao.textContent =
+            "Tente outro termo de busca ou mude o filtro de status.";
+
+        vazio.append(titulo, descricao);
+        listaFilmes.appendChild(vazio);
+
+        mensagemLista.textContent =
+            `Mostrando 0 de ${lista.length} título(s).`;
+        return;
+    }
+
+    mensagemLista.textContent =
+        `Mostrando ${filtrada.length} de ${lista.length} título(s).`;
+
+    filtrada.forEach((filme) => {
         const card = criarCartao(filme);
         listaFilmes.appendChild(card);
     });
 
-    destacarTituloAdicionado();
+    if (primeiraRenderizacao) {
+        primeiraRenderizacao = false;
+        destacarTituloAdicionado();
+    }
 }
+
+// Eventos dos filtros.
+campoBuscaLista.addEventListener("input", () => {
+    termoBusca = campoBuscaLista.value;
+    renderizarMinhaLista();
+});
+
+campoFiltroStatus.addEventListener("change", () => {
+    statusFiltrado = campoFiltroStatus.value;
+    renderizarMinhaLista();
+});
+
+// Evita recarregar a página ao apertar Enter no campo de busca.
+formFiltros.addEventListener("submit", (evento) => {
+    evento.preventDefault();
+});
 
 // Inicialização.
 renderizarMinhaLista();

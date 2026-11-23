@@ -154,10 +154,27 @@ button {
     font-size: 16px;
 }
 
+.rotulo-busca {
+    display: block;
+    margin-top: 35px;
+    color: var(--cor-texto-secundario);
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.erro-campo {
+    min-height: 20px;
+    margin: 0 0 10px;
+    color: #ff6b6b;
+    font-size: 13px;
+    font-weight: 700;
+}
+
 .formulario-pesquisa {
     display: flex;
     gap: 10px;
-    margin: 35px auto 15px;
+    margin: 10px auto 8px;
     padding: 8px;
     max-width: 680px;
     background-color: #ffffff;
@@ -227,6 +244,16 @@ button {
     border-radius: 30px;
     font-size: 14px;
     transition: 0.3s;
+}
+
+button.categoria {
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.categoria:focus-visible {
+    outline: 2px solid var(--cor-destaque);
+    outline-offset: 2px;
 }
 
 .categoria:hover,

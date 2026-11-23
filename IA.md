@@ -283,14 +283,36 @@ Todas as operações CRUD foram testadas e estão funcionando corretamente.
 
 ---
 
+### Registro 7 — 22/11/2026 — Felipe Padson — Claude
+
+**Atividade:** Revisão do projeto antes da entrega final (C5) e correção dos requisitos que estavam incompletos.
+
+**Prompt:**  
+"Verifique se o projeto atende aos requisitos R1 a R10 do Guia do Projeto Integrador e faça as correções e atribuições necessárias."
+
+**Resposta aproveitada:**  
+Uma revisão requisito por requisito, que apontou lacunas em R3 (cartões de destaque escritos direto no HTML), R7 (sem busca ou filtro da lista, com botões de categoria apenas decorativos), R8 (sem uso de `Math`, `Date` e `Number`), R9 (validação quase inexistente) e R10 (README sem responsabilidades específicas e arquivos vazios citados). Em seguida, uma versão corrigida dos arquivos: destaques gerados a partir de um vetor de objetos com filtro por tipo, busca e filtro de status na Minha Lista, validação da busca com mensagem ao lado do campo, nota pessoal de 0 a 10 e data de adição nos títulos salvos, formatação de duração, nota e votos na página de detalhes, e atualização do README.md e do IA.md.
+
+**Aceitei:**  
+A geração dos destaques por vetor e função de renderização, os filtros por tipo e por status, a normalização do texto da busca (minúsculas e sem acentos), a validação da busca e da nota pessoal com mensagens ao lado dos campos, o uso de `Number`, `Math.round`, `toFixed`, `parseInt` e `Date` com finalidade real, a remoção dos arquivos vazios de resultados e a atualização da documentação.
+
+**Modifiquei ou rejeitei:**  
+Não houve rejeição de trechos nesta etapa. Foram preservados a estrutura de pastas, as classes CSS e os nomes das funções já existentes (`renderizar`, `obterMinhaLista`, `salvarMinhaLista`). Dentro da própria resposta, a IA descartou usar `input type="number"` para a nota pessoal, porque esse tipo devolve texto vazio quando o valor digitado é inválido e impediria a exibição da mensagem de erro; por isso o campo é de texto e a conversão é feita com `Number`. A confirmação com `confirm()` na exclusão de títulos foi mantida.
+
+**Verificação:**  
+O código foi executado em um navegador automatizado, com a resposta da OMDb API simulada. Foram conferidos: os 8 destaques desenhados pelo JavaScript e os filtros (4 séries e 4 filmes); a mensagem para busca vazia e para busca com 1 caractere; o retorno de resultados em cartões; adicionar à Minha Lista com a data de adição; busca por título na lista (inclusive com diferença de acento) e filtro por status; nota inválida (11) rejeitada com mensagem ao lado do campo e nota 8,55 salva como 8,6; edição do status e das observações, com os dados mantidos após recarregar a página; exclusão com confirmação; na página de detalhes, duração "169 min" exibida como "2h 49min", nota "8,7" e votos "2.100.345"; mensagem amigável quando a requisição à API falha; e ausência de rolagem horizontal em tela de 375 px nas três páginas.
+
+**Resultado:**  
+As correções ficaram aplicadas no projeto e funcionaram nos testes descritos.
+
+---
+
 ## 7. Participação dos integrantes
 
 | Integrante | Registros atribuídos | Atividades documentadas |
 |---|---:|---|
-| Felipe Padson | 1 e 6 | Planejamento inicial, organização e implementação do CRUD |
+| Felipe Padson | 1, 6 e 7 | Planejamento inicial, organização, implementação do CRUD e revisão final dos requisitos com correções |
 | João Pedro Silva | 2 | Integração com a OMDb API |
 | Danilo Oliveira | 3 | Exibição dinâmica dos resultados |
 | Pedro Silva | 4 | Página de detalhes |
 | Henrique Azevedo | 5 | Revisão e responsividade |
-
-**Observação:** A atribuição dos registros identifica os responsáveis pelas atividades documentadas. Cada integrante deve revisar seu respectivo registro e confirmar que a atividade, o uso da IA e as verificações descritas correspondem à sua participação real no projeto.

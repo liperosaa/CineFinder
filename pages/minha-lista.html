@@ -63,6 +63,37 @@
                 <span>Seus títulos, suas escolhas.</span>
             </div>
 
+            <form class="filtros-lista" id="filtros-lista" role="search" novalidate>
+
+                <div class="grupo-filtro">
+                    <label for="busca-lista" class="label-lista">
+                        Buscar na lista
+                    </label>
+
+                    <input
+                        type="search"
+                        id="busca-lista"
+                        class="campo-lista"
+                        placeholder="Digite parte do título..."
+                        autocomplete="off"
+                    >
+                </div>
+
+                <div class="grupo-filtro">
+                    <label for="filtro-status" class="label-lista">
+                        Filtrar por status
+                    </label>
+
+                    <select id="filtro-status" class="campo-lista">
+                        <option value="todos">Todos</option>
+                        <option value="Quero assistir">Quero assistir</option>
+                        <option value="Assistindo">Assistindo</option>
+                        <option value="Concluído">Concluído</option>
+                    </select>
+                </div>
+
+            </form>
+
             <p
                 id="mensagem-lista"
                 class="mensagem mensagem-lista"
